@@ -1,0 +1,31 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: stockdata
+    env_file:
+      - .env
+    volumes:
+      - psql-jimharris-crypto:/var/lib/postgresql/data
+    restart: always
+
+  binance-ingestor:
+    image: guestros/binance-ingestor-postgres:latest
+    build: ./binance-ingestor
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: stockdata
+    env_file:
+      - .env
+    restart: on-failure
+
+volumes:
+  psql-jimharris-crypto:

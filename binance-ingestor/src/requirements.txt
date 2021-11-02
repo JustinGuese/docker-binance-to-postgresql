@@ -1,0 +1,4 @@
+python-binance
+psycopg2-binary
+SqlAlchemy
+pandas
