@@ -27,6 +27,7 @@ if __name__ == '__main__':
                 df["qty"] = df["qty"].astype(float)
                 df["quoteQty"] = df["quoteQty"].astype(float)
                 df["volume"] = df["qty"] * df["price"]
+                df["id"] = df["id"] + df["symbol"]
                 df["pctOfMarketcap"] = df["qty"] / MARKETCAP * 1000000000
 
                 # print(df.head())
